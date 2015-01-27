@@ -19,9 +19,9 @@ import lab4.model.WelcomeService;
  *
  * @author Daniel
  */
-@WebServlet(name = "greeter", urlPatterns = {"/greeter"})
+@WebServlet(name = "GreeterController", urlPatterns = {"/greeter"})
 public class GreeterController extends HttpServlet {
-private static final String RESULT_PAGE = "result.jsp";
+private static final String WELCOME_PAGE = "lab4/result.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,19 +37,24 @@ private static final String RESULT_PAGE = "result.jsp";
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             
+            response.setContentType("text/html");
+        
+            String fName = request.getParameter("firstName");
+            String lName = request.getParameter("lastName");
+        
+            WelcomeService w = new WelcomeService();
+        
+            //w.buildMessage(fName, lName);
+        
+            String result = w.getMessage(fName, lName);
+        
+            request.setAttribute("message", result);
+        
+            RequestDispatcher view =
+                request.getRequestDispatcher(WELCOME_PAGE);
+            view.forward(request, response);    
             
-            String firstName = request.getParameter("firstName");
-            String lastName = request.getParameter("lastName");
             
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet GreeterController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet GreeterController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
         }
     }
 
@@ -65,7 +70,7 @@ private static final String RESULT_PAGE = "result.jsp";
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       processRequest(request, response);
     }
 
     /**
@@ -79,20 +84,8 @@ private static final String RESULT_PAGE = "result.jsp";
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html");
-        
-        String fName = request.getParameter("firstName");
-        String lName = request.getParameter("lastName");
-        
-        WelcomeService w = new WelcomeService();
-        
-        w.buildMessage(fName, lName);
-        
-        RequestDispatcher view =
-                request.getRequestDispatcher(RESULT_PAGE);
-        view.forward(request, response);
-           
-        
+
+        processRequest(request, response);           
     }
 
     /**

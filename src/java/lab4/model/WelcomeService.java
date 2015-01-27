@@ -14,7 +14,7 @@ public class WelcomeService {
    private final String AFTERNOON = "Afternoon"; //Message for afternoon time
    private final String EVENING = "Evening"; //Message for evening time
    private final int NOON = 12;
-   private final int FOUR = 4;
+   private final int FOUR = 16; //military time
    private String msg;
    
    
@@ -29,11 +29,10 @@ public class WelcomeService {
                                
         if(hour < NOON){
             displayTime = MORNING;
-        }else if(hour <= FOUR || hour >= NOON) {
-            displayTime = AFTERNOON;
+        }else if(hour <= FOUR && hour >= NOON) {
+            displayTime = AFTERNOON;            
         }else{
             displayTime = EVENING;
-            System.out.println(hour);
         }              
     }
          
@@ -44,9 +43,13 @@ public class WelcomeService {
        getLastName(lastName);
        
        msg = "Good " + displayTime + ", " + firstName + ". Welcome!";
-       System.out.println(msg);
+       //System.out.println(msg);
    }      
          
+   public String getMessage(String firstName, String lastName){
+       buildMessage(firstName, lastName);
+       return msg;
+   }
    
   
    public String getFirstName(String firstName){      
@@ -57,17 +60,4 @@ public class WelcomeService {
        return lastName;
    }
     
-   
-   
-   public static void main(String[] args) {
-           WelcomeService w = new WelcomeService();
-           
-           String f = "Dan";
-           String l = "Wargolet";
-           
-           w.buildMessage(f, l);
-    }
-   
-    
-
 }

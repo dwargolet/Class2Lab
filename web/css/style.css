@@ -1,0 +1,21 @@
+/* 
+    Created on : Jan 26, 2015, 2:41:14 PM
+    Author     : Daniel
+*/
+
+body {
+	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
+	background-color: #C1C1C1;
+	margin: 10px;
+	padding: 0;
+}
+
+
+#nameForm {
+    text-align: center;
+    border: 2px solid #333333;
+    max-width: 400px;
+    padding: 10px 10px 10px;
+    
+}
+
